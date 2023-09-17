@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnologias a favor da inclusão</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="icon" href="cadeira.png" type="image/png">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between; /* Espaçamento entre elementos */
+            min-height: 100vh; /* Altura mínima para preencher a tela */
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 2vh;
+            transition: background-color 0.3s;
+        }
+
+        h1 {
+            color: #34495e;
+            font-size: 4vw;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            margin: 2vh 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2vh;
+            width: 100%;
+        }
+
+        #slide, #vlibras {
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+            max-width: 100%;
+            object-fit: cover;
+        }
+
+        #slide {
+            width: 60vw;
+        }
+
+        #vlibras {
+            width: 30vw;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1vw;
+            justify-content: center;
+            width: 100%;
+            margin-top: 2vh;
+        }
+
+        button {
+            padding: 1vw 2vw;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.5vw;
+            font-weight: 700;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        #audioPlayer {
+            width: 80%;
+            margin-top: 2vh;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #slide {
+                width: 90vw;
+            }
+
+            #vlibras {
+                width: 80vw;
+            }
+
+            h1 {
+                font-size: 8vw;
+            }
+
+            button {
+                font-size: 4vw;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>TECNOLOGIAS A FAVOR DA INCLUSÃO</h1>
+    <div class="container">
+        <img id="slide" src="slide1.png" alt="Slide 1">
+        <video id="vlibras" controls loop>
+            <source src="libras1.mp4" type="video/mp4">
+            Seu navegador não suporta o elemento de vídeo.
+        </video>
+    </div>
+    <audio id="audioPlayer" controls>
+        <source src="audio1.wav" type="audio/wav">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    <div class="buttons">
+        <button onclick="voltarSlide()">Voltar Slide</button>
+        <button onclick="mudarSlide()">Próximo Slide</button>
+    </div>
+    <script>
+        let slideAtual = 1;
+        const totalSlides = 32;
+
+        function mudarSlide() {
+            slideAtual++;
+            if (slideAtual > totalSlides) {
+                slideAtual = 1;
+            }
+            atualizarSlide();
+        }
+
+        function voltarSlide() {
+            slideAtual--;
+            if (slideAtual < 1) {
+                slideAtual = totalSlides;
+            }
+            atualizarSlide();
+        }
+
+        function atualizarSlide() {
+            document.getElementById('slide').src = `slide${slideAtual}.png`;
+            document.getElementById('vlibras').children[0].src = `libras${slideAtual}.mp4`;
+            document.getElementById('vlibras').load();
+            document.getElementById('vlibras').playbackRate = 1.5;
+            document.getElementById('audioPlayer').children[0].src = `audio${slideAtual}.wav`;
+            document.getElementById('audioPlayer').load();
+            document.getElementById('audioPlayer').playbackRate = 1.5;
+        }
+
+        document.getElementById('audioPlayer').playbackRate = 1.5;
+        document.getElementById('vlibras').playbackRate = 1.5;
+    </script>
+
+</body>
+
+</html>
